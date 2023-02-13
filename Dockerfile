@@ -3,8 +3,7 @@ FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
 
 WORKDIR /
 
-ARG dd
-RUN echo $dd
+ARG GDRIVE_ID
 # Install git
 RUN apt-get update && apt-get install -y git
 
@@ -21,6 +20,7 @@ ADD server.py .
 ADD download.py .
 RUN python3 download.py
 
+RUN wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=$GDRIVE_ID' -O emb.pt
 
 # Add your custom app code, init() and inference()
 ADD app.py .
