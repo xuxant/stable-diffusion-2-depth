@@ -5,7 +5,7 @@ WORKDIR /
 
 #ARG GDRIVE_ID
 # Install git
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git wget
 
 # Install python packages
 RUN pip3 install --upgrade pip
