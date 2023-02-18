@@ -109,10 +109,26 @@ def inference(model_inputs:dict) -> dict:
     init_image = Image.open(requests.get(image_url, stream=True).raw)
 
     output_image = pipe(prompt=prompt, image=init_image).images[0]
-    
+        #Extra Code Start
+    output_image_1 = pipe(prompt=prompt, image=init_image).images[1]
+    output_image_2 = pipe(prompt=prompt, image=init_image).images[2]
+    output_image_3 = pipe(prompt=prompt, image=init_image).images[3]
+
     buffered = BytesIO()
     output_image.save(buffered,format="JPEG")
     image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    
+    buffered_1 = BytesIO()
+    output_image_1.save(buffered_1,format="JPEG")
+    image_base64_1 = base64.b64encode(buffered_1.getvalue()).decode('utf-8')
 
+    buffered_2 = BytesIO()
+    output_image_2.save(buffered_2,format="JPEG")
+    image_base64_2 = base64.b64encode(buffered_2.getvalue()).decode('utf-8')
+
+    buffered_3 = BytesIO()
+    output_image_3.save(buffered_3,format="JPEG")
+    image_base64_3 = base64.b64encode(buffered_3.getvalue()).decode('utf-8')
+        #Extra Code End
     # Return the results as a dictionary
-    return {'image_base64': image_base64}
+    return {'image_base64': image_base64, 'image_base64_1': image_base64_1, 'image_base64_2': image_base64_2, 'image_base64_3': image_base64_3}
