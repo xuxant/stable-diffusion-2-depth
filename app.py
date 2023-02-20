@@ -104,15 +104,35 @@ def inference(model_inputs:dict) -> dict:
 
     n_prompt = model_inputs.get('negative_prompt', "")
     strength = model_inputs.get('strength', 0.7)
-    
 
     init_image = Image.open(requests.get(image_url, stream=True).raw)
 
-    output_image = pipe(prompt=prompt, image=init_image).images[0]
+#   output_image = pipe(prompt=prompt, image=init_image).images[0]
+    output_images = pipe(prompt=prompt, image=init_image, num_images_per_prompt=4).images
+ 
+    output_image = output_images.images[0]
+
+    buffered = BytesIO()
+    output_image.save(buffered,format="JPEG")
+    image_base64_0 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+    output_image = output_images.images[1]
+
+    buffered = BytesIO()
+    output_image.save(buffered,format="JPEG")
+    image_base64_1 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    output_image = output_images.images[2]
+
+    buffered = BytesIO()
+    output_image.save(buffered,format="JPEG")
+    image_base64_2 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+    output_image = output_images.images[3]
     
     buffered = BytesIO()
     output_image.save(buffered,format="JPEG")
-    image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    image_base64_3 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
+        
     # Return the results as a dictionary
-    return {'image_base64': image_base64}
+    return {'image_base64_0': image_base64_0, 'image_base6_1': image_base63_1, 'image_base64_2': image_base64_2, 'image_base64_3': image_base64_3}
