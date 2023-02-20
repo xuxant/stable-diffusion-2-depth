@@ -135,4 +135,4 @@ def inference(model_inputs:dict) -> dict:
 
         
     # Return the results as a dictionary
-    return {'image_base64_0': image_base64_0, 'image_base6_1': image_base63_1, 'image_base64_2': image_base64_2, 'image_base64_3': image_base64_3}
+    return {'image_base64_0': image_base64_0, 'image_base6_1': image_base64_1, 'image_base64_2': image_base64_2, 'image_base64_3': image_base64_3}
