@@ -105,6 +105,11 @@ def inference(model_inputs:dict) -> dict:
     n_prompt = model_inputs.get('negative_prompt', "")
     strength = model_inputs.get('strength', 0.7)
 
+    print(model_inputs.get('imageURL', None))
+    print(model_inputs.get('strength', 0.7))
+    print(model_inputs.get('prompt', None))
+    print(model_inputs.get('negative_prompt', ""))
+
     init_image = Image.open(requests.get(image_url, stream=True).raw)
 
 #   output_image = pipe(prompt=prompt, image=init_image).images[0]
