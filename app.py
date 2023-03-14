@@ -103,7 +103,10 @@ def inference(model_inputs:dict) -> dict:
         return {'message': "No prompt provided"}
 
     n_prompt = model_inputs.get('negative_prompt', "")
-    strength = model_inputs.get('strength', 0.7)
+    strength = model_inputs.get('strength', 0.8)
+    num_inference_steps = model_inputs.get('num_inference_steps', 50)
+    guidance_scale = model_inputs.get('guidance_scale', 7.5)
+
 
     print(model_inputs.get('imageURL', None))
     print(model_inputs.get('strength', 0.7))
@@ -113,7 +116,9 @@ def inference(model_inputs:dict) -> dict:
     init_image = Image.open(requests.get(image_url, stream=True).raw)
 
 #   output_image = pipe(prompt=prompt, image=init_image).images[0]
-    output_images = model(prompt=prompt, image=init_image, num_images_per_prompt=4).images
+#   output_images = model(prompt=prompt, image=init_image, num_images_per_prompt=4)
+
+    output_images = model(prompt=prompt, image=init_image, num_images_per_prompt=4, negative_prompt=n_prompt, strength=strength, num_inference_steps=num_inference_steps, guidance_scale=guidance_scale).images
  
     output_image = output_images[0]
 
