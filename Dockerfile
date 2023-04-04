@@ -19,7 +19,7 @@ ADD server.py .
 # (in this case we have a python script)
 ADD download.py .
 RUN python3 download.py
-
+# where i refer to the embedding
 RUN wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1d8tufvV_6f3Zb93jSsQomw_rsD4-qr7x' -O emb.pt
 
 # Add your custom app code, init() and inference()
