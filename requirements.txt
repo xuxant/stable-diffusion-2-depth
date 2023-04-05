@@ -4,3 +4,4 @@ git+https://github.com/huggingface/transformers
 accelerate
 safetensors
 scipy
+websockets==10.0 
