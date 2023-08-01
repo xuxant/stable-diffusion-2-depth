@@ -5,4 +5,4 @@ accelerate
 safetensors
 scipy
 websockets==10.0 
-potassiu==0.1.2
+potassium==0.1.2
