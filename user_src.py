@@ -78,21 +78,20 @@ def add_textual_inversion_embedding(model, token: str, embedding: torch.Tensor):
 # Init is ran on server startup
 # Load your model to GPU as a global variable here using the variable name "model"
 def init():
-    global model
-    
-    
     model = StableDiffusionDepth2ImgPipeline.from_pretrained("stabilityai/stable-diffusion-2-depth",torch_dtype=torch.float16).to("cuda")
+    
     textual_inversion_embedding = torch.load("emb.pt",map_location="cuda")
     token = extract_token_from_dict(textual_inversion_embedding)
     embedding = extract_embedding_from_dict(textual_inversion_embedding)
     embedding = embedding[0]
     model = add_textual_inversion_embedding(model,token,embedding)
+   
+
+    return {'model': model}
 
 # Inference is ran for every server call
 # Reference your preloaded global model variable here.
-def inference(model_inputs:dict) -> dict:
-    global model
-
+def inference(model, model_inputs) -> dict:
     # Parse out your arguments
     image_url = model_inputs.get('imageURL', None)
     if image_url == None:

@@ -23,8 +23,8 @@ RUN python3 download.py
 RUN wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1d8tufvV_6f3Zb93jSsQomw_rsD4-qr7x' -O emb.pt
 
 # Add your custom app code, init() and inference()
-ADD app.py .
 
 EXPOSE 8000
 
+ADD user_src.py .
 CMD python3 -u server.py
