@@ -29,4 +29,4 @@ EXPOSE 8000
 
 ADD user_src.py .
 
-CMD python3 -u server.py
+CMD python3 -u app.py
