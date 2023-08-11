@@ -3,7 +3,7 @@ FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
 
 WORKDIR /
 
-#ARG GDRIVE_ID
+ARG GDRIVE_ID
 ENV GDRIVE_ID=${GDRIVE_ID} 
 # Install git
 RUN apt-get update && apt-get install -y git wget
